@@ -1,0 +1,528 @@
+\section{Rings and Ideals}
+
+\begin{ex}
+Let $x$ be a nilpotent element of a ring $A$. Show that $1+x$ is a unit of $A$. Deduce that the sum of a nipotent element and a unit is a unit.
+\end{ex}
+
+\begin{sol}
+	If $x$ is a nilpotent element, then $\exists n \in \N$ such that $x^n = 0$. Let's consider the element $y = 1 - x + x^2 - \dots \pm x^{n-1} \in A$. $(1+x)y = 1 \pm x^n = 1$, and therefore $1+x$ is a unit of $A$.
+
+	Let now $x \in A$ be a nilpotent element, and $y \in A$ a unit. Then $\exists n \in \N \mid x^n = 0$ and $\exists a \in A \mid ya = 1$. Then $a(y+x) = ay+ax = 1+ax$ and we can reduce to the first case, as $ax$ is also a nilpotent element. Therefore $a(y+x)$ is a unit and $\exists b \in A \mid ba(x+y) = 1$ which implies $(x+y)$ is also a unit. 
+\end{sol}
+
+\begin{ex}
+Let $A$ be a ring and let $A[x]$ be the ring of polynomials in an indeterminate $x$, with coefficients in A. Let $f = a_0 + a_1 x + \dots + a_nx^n \in A[x]$. Prove that
+\begin{enumerate}[label=(\roman*)]
+		\item $f$ is a unit in $A[x] \iff a_0$ is a unit in $A$ and $a_1, \dots , a_n$ are nilpotent. [If $b_0 + b_1 x + \dots + b_mx^m$ is the inverse of $f$, prove by induction on $r$ that $a_n^{r+1}b_{m-r} = 0$. Hence show that $a_n$ is nilpotent, and then use Ex.1]
+		\item $f$ is nilpotent $\iff$ $a_0 , a_1 , \dots , a_n$ are nilpotent.
+		\item $f$ is a zero-divisor $\iff$ there exists $a \neq 0$ in A such that $af = 0$. [Choose a polynomial $g = b_0 + b_1 x + \dots + b_m x^m$ of least degree m such that $fg = 0$. Then $a_nb_m = 0$, hence $a_ng = 0$ (because $a_n g$ annihilates $f$ and has degree $< m$). Now show by induction that $a_{n-r} g = 0$ ($0 \leq r \leq n$).]
+		\item $f$ is said to be primitive if $(a_0, a_1 , \dots , a_n) = (1)$. Prove that if $f,g \in A[x]$, then $fg$ is primitive $\iff f$ and $g$ are primitive.
+\end{enumerate}
+\end{ex}
+
+\begin{sol}
+\begin{enumerate}[label=(\roman*)]
+	\item $\boxed{\Leftarrow}$ We will proceed by induction on $n$. If $n = 0$ then $f = a_0$ which is a unit in $A$ and therefore also in $A[x]$, because $A \subset A[x]$. So let's suppose that the statement holds for $n = k$. In the case $n = k+1$ we have $f = a_0 + a_1x + \dots + a_k x^k + a_{k+1}x^{k+1}$, where $a_{k+1}$ is nilpotent by hypothesis and $a_0 + a_1x + \dots + a_k x^k$ is a unit by induction hypothesis. Then $a_{k+1} x^{k+1}$ is also nilpotent and $f$ is a sum of a unit and a nilpotent element, which implies that $f$ is a unit by Exercise 1.1. 
+
+	$\boxed{\Rightarrow}$ If $f = a_0 \in A$ the statement is clearly true. We can supose then that $n > 0$. Let $f^{-1} = b_0 + b_1 x + \dots + b_mx^m$. We will first see by induction on $r$ that $a_n^{r+1} b_{m-r} = 0 \, \, \forall r \in \{0, \dots , m \}$. 
+	\[
+	1 = ff^{-1} = \sum_{i = 0}^{n+m} \left ( \sum_{j = 0}^i a_j b^{i-j} \right ) x^i
+	\]
+
+	Therefore, the term $x^{n+m}$ has coefficient 0 and $a_n b_m = 0$, which proves the base case $r = 0$. Let's assume that the statement holds $ \forall k < r$. The coefficient of $x^{n+m-r}$ can be expressed as $\sum_{i = 0}^{n} a_{n-i} b_{m-r+i}$. As we have $n > 0$, and $r \leq m$ then $n+m-r \neq 0$ and we have that
+
+	\[
+		\sum_{i = 0}^{n} a_{n-i} b_{m-r+i} = 0
+	\]
+	
+	Multiplying by $a_n^r$, all terms of the sumatory except from $i = 0$ vanish by induction hypotesis, which results in
+
+	\[
+		a_n^r a_{n} b_{m-r} = 0 \Rightarrow a_n^{r+1}b_{m-r} = 0
+	\]
+
+	In particular, setting $r = m$ we have that $a_n^m f^{-1} = 0 \imp a_n^m ff^{-1} = 0 \imp a_n^m = 0$. Then $a_n$ is nilpotent and $-a_nx^n$ is also nilpotent. By exercise 1, $f-a_n x^n = a_0 + a_1 x + \dots + a_{n-1} x^{n-1}$ is a unit and we can repeat the same argument and conclude that $a_{n-1}$ is nilpotent. Repeating that procedure $n$ times we show that $a_1, \dots, a_n$ are nilpotent, and $a_0$ is a unit.
+	
+
+
+	\item $\boxed{\Leftarrow}$ $a_i$ nilpotent $\imp a_i x^i$ nilpotent, and the sum of nilpotent elements is also nilpotent by proposition 1.7. Then $f = \sum_{i=0}^n a_i x^i$ is nilpotent.
+
+	$\boxed{\Rightarrow}$ $f$ nilpotent $\imp \exists m \in \N$ such that $f^m = 0$. In consequence, all the coefficients of th polynomial $f^m$ are zero, and in particular, for the term of lowest degree we have $a_0^m = 0 \imp a_0$ is nilpotent. As the sum of nilpotents is nilpotent, then $f-a_0 = x(a_1 + \dots + a_n x^{n-1})$ is also nilpotent. As $x$ is not a zero divisor, then $a_1 + \dots + a_n x^{n-1}$ is nilpotent and we can apply the same argument, which allows us to conclude that $a_1$ is nilpotent. Applying the same reasoning, we find that $a_0, \dots, a_n$ are nilpotent in $A$.
+	
+	\item $\boxed{\Leftarrow}$ By the definition of zero-divisor.
+
+	$\boxed{\Rightarrow}$ If $f$ is a zero-divisor then $\exists g \neq 0 \in A[x] \mid fg = 0$. Let's choose $g$ a polynomial of minimum degree sugh that $fg = 0$, $g = b_0 + \dots + b_m x^m$. We will see by induction that $a_{n-r} g = 0 \, \, \forall r \in \{0, \dots, n\}$. The base case $r = 0$ is deduced directly from $fg = 0 \imp a_n b_m = 0 \imp a_n g = 0$, as $a_n g$ anihilates $f$ and has degree lower than $g$. Let's suppose that the statement holds for $r < k-1$ and prove it for $r = k$. 
+
+	\[
+		fg = 0 = a_0 g + \dots + a_{n-r}g x^{n-r} + a_{n-(r-1)}g x^{n-(r-1)} + \dots + a_n g x^n
+	\]
+
+	By induction hypothesis all the terms $a_{n-(r-i)}g$ vanish and we have 
+	\[
+		0 = a_0 g + \dots + a_{n-r}g x^{n-r}
+	\]
+
+	And using the same argument than in base case, we conclude that $a_{n-r}g = 0$.
+
+	Then $a_i g = 0 \, \, \forall i \in \{0 , \dots , n\}$ and therefore $a_i b_m = 0 \, \, \forall i$. If $m > 0$ that means 
+	\[
+		fg = f(b_0 + \dots + b_m x^m) = f(b_0 + \dots + b_{m-1} x^{m-1}) = 0
+	\]
+
+	That is a contradiction as we have chosen $g$ with lowest degree, so $m = 0$ and $a = b_0$ is the element we were looking for.
+
+
+	\item Let $fg = c_0 + c_1 x + \dots + c_{n+m}x^{n+m}$, with $c_k = \sum_{i = 0}^k a_i b_{k-i}$.
+
+	$\boxed{\Rightarrow}$ $(a_0, \dots, a_n) \supseteq (c_0, \dots, c_{n+m})$ and $(b_0, \dots, b_m) \supseteq (c_0, \dots, c_{n+m})$. Then, if $fg$ is primitive, $(c_0, \dots, c_{n+m}) = (1)$ and therefore $f$ and $g$ are also primitive.
+
+	$\boxed{\Leftarrow}$ Suppose that $fg$ is not primitive. Then let $(c_0, \dots, c_{n+m}) = I \subseteq \mathfrak{m}$, with $I \neq A$ an ideal of A, and $\mathfrak{m}$ a maximal ideal of $A$ containing $I$. The extension of $\mathfrak{m}$ in $A[x]$ is $\mathfrak{m}^e = \mathfrak{m}[x]$ which implies that $A[x]/\mathfrak{m}^e \cong A/\mathfrak{m} [x]$, which is a domain. In $A/\mathfrak{m} [x]$, $\closure{fg} = 0$, because $c_i \in \mathfrak{m} \, \, \forall i$. Then, either $f$ or $g$ must be zero. Let's say $\closure{f} = 0$. Then, $(1) = (a_0, \dots, a_n) \subseteq \mathfrak{m}$ which is a contradiction. Then $fg$ must be primitive.
+
+\end{enumerate}
+\end{sol}
+
+\begin{ex}
+	Generalize the results of Exercise 2 to a polynomial ring $A[x_1, \dots, x_n]$ in several indeterminates.
+\end{ex}
+
+\begin{sol}
+	Let $f = \sum \lambda_{I} x_1^{i_1} \cdots x_n^{i_n}$, where $I$ is the multiindex $I = (i_1, \dots, i_n)$.
+
+	\begin{enumerate}[label=(\roman*)]
+		\item $f$ is a unit in $A[x_1, \dots, x_n] \iff \lambda_{0,\dots,0}$ is a unit in $A$ and $\lambda_I$ is nilpotent $\forall I \neq (0, \dots, 0)$. 
+
+		We will prove this by induction on the number of indeterminates $n$. The base case ($n = 1$) is the statement of Exercise 1.2 i). Let's assume that the statement is true for $n-1$ indeterminates. Then $f$ can be written as $f = \sum_{i = 0}^m a_i x_n^i$, with $a_i \in A[x_1, \dots, x_{n-1}]$. By Exercise 1.2, $f$ is a unit $\iff a_0$ is a unit in $A[x_1, \dots, x_{n-1}]$ and $a_i$ is nilpotent $\forall i \neq 0$. We complete the proof applying induction hypothesis on $a_0$.
+
+		\item $f$ is nilpotent $\iff$ $\lambda_I$ is nilpotent $\forall I$. 
+
+		Let's proceed by induction on $n$. The base case ($n = 1$) is the statement of Exercise 1.2 ii). Let's assume that the statement is true for $n-1$ indeterminates. In the case of $n$ indeterminates, $f = \sum_{i = 0}^m a_i x_n^i$, with $a_i \in A[x_1, \dots, x_{n-1}]$. By Exercise 1.2, $f$ is nilpotent $\iff a_i$ is nilpotent $\forall i$. We complete the proof applying induction hypothesis on each $a_i$.
+
+		\item $f$ is a zero-divisor $\iff$ there exists $b \neq 0$ in A such that $bf = 0$.
+
+		The inverse implication is obvoius. We will use induction again for the direct one. The base case ($n = 1$) is the statement of Exercise 1.2 iii). Let's assume that the statement is true for $n-1$ indeterminates. In the case of $n$ indeterminates, $f = \sum_{i = 0}^m a_i x_n^i$, with $a_i \in A[x_1, \dots, x_{n-1}]$. By Exercise 1.2, $f$ is a zero divisor $\iff$ there exists $a \in A[x_1, \dots, x_{n-1}]$ such that $af = 0$. If we consider $af$ as a polynomial on $x_n$ over the ring $A[x_1, \dots, x_{n-1}]$ we conclude that $af = 0 \iff a a_i = 0 \, \, \forall i$ is a zero divisor $\forall i$. By induction hypothesis, that is equivalent to $\exists b_i \in A$ such that $b_i a_i = 0 \, \, \forall i$, and the argument used in the proof of 1.2 iii) guarantees that we can take the same element $b = b_i \forall i$.
+
+		\item $fg$ is primitive $\iff f$ and $g$ are primitive.
+
+		The proof is the same as Exercise 1.2 iv).
+
+	\end{enumerate}
+\end{sol}
+
+\begin{ex}
+	In the ring $A[x]$, the Jacobson radical is equal to the nilradical.
+\end{ex}
+
+\begin{sol}
+	Let $\mathcal{N}, \mathcal{J}$ denote the nilradical and the Jacobson radical of $A[x]$, respectively. We already know that $ \mathcal{N} \subseteq \mathcal{J}$, as $\mathcal{N} = \bigcap\limits_{\mathfrak{p} \text{ prime}} \mathfrak{p}$ and $\mathcal{J} = \bigcap\limits_{\mathfrak{m} \text{ maximal}} \mathfrak{m}$, and every maximal ideal is prime.
+
+	Let's now prove the other inclusion. Let $f(x) \in \mathcal{J} \imp 1-fg$ is a unit $\forall g \in A[x] \imp 1- xf(x)$ is a unit $\imp a_0, \dots, a_n$ are nilpotent (we have used Exercise 1.2 i)). Using now 1.2 ii) $\imp f$ is nilpotent $\imp f \in \mathcal{N}$.
+\end{sol}
+
+\begin{ex}
+ Let $A$ be a ring and let $A[[x]]$ be the ring of formal power series $f = \sum\limits_{n = 0}^{\infty} a_nx^n$ with coefficients in A. Show that
+
+ \begin{enumerate}[label=(\roman*)]
+		\item $f$ is a unit in $A[[x]] \iff a_0$ is a unit in $A$.
+
+		\item If $f$ is nilpotent, then $a_n$ is nilpotent for all $n \geq 0$. Is the converse true? (See Chapter 7, Exercise 2.)
+
+		\item $f$ belongs to the Jacobson radical of $A[[x]] \iff a_0$ belongs to the Jacobson radical of $A$.
+
+		\item The contraction of a maximal ideal $\mathfrak{m}$ of $A[[x]]$ is a maximal ideal of $A$, and $\mathfrak{m}$ is generated by $\mathfrak{m}^c$ and $x$.
+
+		\item Every prime ideal of $A$ is the contraction of a prime ideal of $A[[x]]$.
+\end{enumerate}
+\end{ex}
+
+\begin{sol}
+	\begin{enumerate}[label=(\roman*)]
+		\item $\boxed{\Rightarrow}$ $f$ is a unit in $A[[x]] \imp \exists g = \sum\limits_{n = 0}^{\infty} b_nx^n \in A[[x]]$ such that $fg = 1 \imp a_0 b_0 = 1$, which means that $a_0$ is a unit in $A$. 
+		
+		$\boxed{\Leftarrow}$ Let $a_0 b_0 = 1$. We want to define $\{b_n\}_{n \geq 0}$ such that 
+		\[
+			\sum\limits_{n = 0}^{\infty} b_nx^n \sum\limits_{m = 0}^{\infty} a_mx^m = 0
+		\]
+
+		Let $\{b_n\}_{n \geq 0}$ be an arbitrary sequence that defines an element $g \in A[[x]]$. Then the term of $fg$ corresponding to exponent $k$ is $c_k = \sum_{i+j = k} a_i b_j$. That allows us to define the desired sequence $\{b_n\}_{n \geq 0}$ in a recursive way. 
+
+		$b_0$ is already defined as the inverse of $a_0$. We want $b_1$ satisfying that $a_0 b_1 + b_0 a_1 = 0$, so $a_0 b_1 = -b_0 a_1$, and we can isolate $b_1$ as $a_0$ is invertible.
+		\[
+			b_1 = -b_0^2 a_1
+		\]
+
+		The same procediment allows to find $b_{k+1}$ as a function of $b_i, \, 0\leq i\leq k$. 
+
+		\[
+			b_k = -b_0\sum_{i+j = k, \, i>0} a_i b_j
+		\]
+
+		That gives an explicit construction of $g = \sum\limits_{n = 0}^{\infty} b_nx^n \in A[[x]]$ such that $fg = 1$, and therefore proves that $f$ is invertible.
+
+		\item Let's suppose that $\exists n \in \N$ such that $f^n = 0$. We will prove by induction that $a_i$ is nilpotent $\forall i \in \N$.
+		\[
+			0 = f^n =  \left ( \sum_{i = 0}^\infty a_i x^i \right )^n
+		\]
+
+		Then, each coefficient of $f^n$ has to be zero. This condition for the independent term of $f^n$ implies that $a_0^n = 0$ and therefore $a_0$ is nilpotent, which proves the base case. Let's assume that $a_i, \, 0 \leq i \leq k$ are nilpotent. Then, by Proposition 1.7, $f-\sum_{i = 0}^k a_i x^i = x^{k}\sum_{i = 1}^\infty a_{i+k} x^k$ is also nilpotent. The same argument used in the base case suffices to prove that $a_{k+1}$ is nilpotent, and the proof is complete. The converse is shown in exercise 7.2.
+
+		\item Using Proposition 1.9, $f$ belongs to the Jakobson radical of $A[[x]] \iff 1-fg$ is a unit $\forall g \in A[[x]]$. By part i) of the exercise, that happens $\iff 1-a_0b_0$ is a unit $\forall b_0 \in A$, which happens $\iff a_0$ belongs to the Jakobson radical of $A$.
+
+		\item First, we observe that $\mathfrak{m}$ is a maximal ideal of $A[[x]] \imp x \in \mathfrak{m}$: Otherwise, $\mathfrak{m} \subset \mathfrak{m} + (x)$, and $\mathfrak{m} + (x) \neq A[[x]]$ as it doesn't contain units: If $1 = f + g$, with $g \in (x)$ and $f \in \mathfrak{m}$, then by part i) of the exercise $a_0$ is a unit in $A$, which implies $f$ is a unit and therefore $\mathfrak{m} = A[[x]]$, which is a contradiction.
+
+		Let $\mathfrak{m} \in \text{Max}\{A[[x]]\}$. Let's suppose that $\mathfrak{m}^c = \mathfrak{m} \cap A$ is not maximal. Then $\exists a \in A, \, a \notin \mathfrak{m}^c$ such that $\mathfrak{m}^c + (a) \neq (1)$. But $a \notin \mathfrak{m}^c \imp a \notin \mathfrak{m}$ and therefore $\exists f \in \mathfrak{m}, \, g \in A[[x]]$ such that 
+		\[
+			f + ag = 1
+		\]
+		That implies $f_0 + ag_0 = 1$. And, recalling that $x \in \mathfrak{m} \imp a_0 \in \mathfrak{m}^c$, and therefore $\mathfrak{m}^c + (a) = (1)$ which is a contradiction.
+
+
+		Moreover, $\mathfrak{m}^c + (x) \subseteq \mathfrak{m}$, and given $f = a_0 + x \sum_{i = 0}^\infty a_{i+1} x^i \in \mathfrak{m}$ it's clear that $a_0 \in \mathfrak{m}^c$ and the set equality holds.
+
+		\item Let $\mathfrak{p} \in \text{Spec}\{A[[x]]\}$, and let's consider the ideal of $A[[x]]$ $\mathfrak{p}' = \mathfrak{p} + (x)$. The same argument used in iv) guarantees that $\mathfrak{p}' \neq A[[x]]$, and it's clear that $(\mathfrak{p}')^c = \mathfrak{p}$. We only need to check that $\mathfrak{p}'$ is prime, which follows from
+
+		\[
+			\frac{A[[x]]}{\mathfrak{p}'} \cong \frac{A}{\mathfrak{p}}
+		\]
+	\end{enumerate}
+
+
+\end{sol}
+
+
+\begin{ex}
+A ring $A$ is such that every ideal not contained in the nilradical contains a non-zero idempotent (that is, an element $e$ such that $e^2 = e \neq 0$). Prove that the nilradical and Jacobson radical of $A$ are equal.
+\end{ex}
+
+\begin{sol}
+ Let's prove the inclusion $\mathcal{J} \subseteq \mathcal{N}$, as the other inclusion is true in general. Let $x \in \mathcal{J}$ and suppose that $x \notin \mathcal{N}$. Then $(x) \notin \mathcal{N} \imp \exists e \in (x), \, e = ax \neq 0$ such that $e^2 = e \imp (ax)^2 = ax$. That implies that $(1-ax)ax = 0$, but $1-ax$ is a unit as $x \in \mathcal{J} \imp 1-ax$ is a unit $\forall a \in A$. Therefore $ax = 0$, which is a contradiction comming from the supposition that $x \notin \mathcal{N}$. In conclusion, $\mathcal{N} = \mathcal{J}$.
+\end{sol}
+
+\begin{ex}
+	Let $A$ be a ring in which every element $x$ satisfies $x^n = x$ for some $n > 1$ (depending on $x$). Show that every prime ideal in $A$ is maximal.
+\end{ex}
+
+\begin{sol}
+	Let $\mathfrak{p}$ be a prime ideal. $\forall x \in A \exists n > 0 | x^n = x \imp x(x^{n-1} -1) = 0$. Let's reduce this equality modulo $\mathfrak{p}$. As $A/\mathfrak{p}$ is a domain, every non-zero element satisfies $x^{n-1} = 1$, and in particular every non-zero element is invertible, which means that $A/\mathfrak{p}$ is a field and therefore $\mathfrak{p}$ is maximal.
+\end{sol}
+
+\begin{ex}
+ Let $A$ be a ring $\neq 0$. Show that the set of prime ideals of A has minimal elements with respect to inclusion.
+\end{ex}
+
+\begin{sol}
+	Let's consider the set $\text{Spec}\{A\}$ partially ordered by the relation $\geq = \subseteq$. By Theorem 1.3, $A \neq 0 \imp \text{Spec}\{A\} \neq \emptyset$. Moreover, given a chain of prime ideals 
+	\[
+		\mathfrak{p}_1 \supseteq \mathfrak{p}_2 \supseteq \mathfrak{p}_3 \supseteq \dots
+	\]
+
+	the ideal $\bigcap_{i = 0}^\infty \mathfrak{p}_i$ is an upper bound of the chain. Therefore, $\text{Spec}\{A\}$ with the given order relation satisfies the conditions of Zorn's Lemma, which proves that $\text{Spec}\{A\}$ has minimal elements with respect to inclusion.
+\end{sol}
+
+\begin{ex}
+	Let $\mathfrak{a}$ be an ideal $\neq (1)$ in a ring $A$. Show that $\mathfrak{a} = r(\mathfrak{a}) \iff \mathfrak{a}$ is an intersection of prime ideals.
+\end{ex}
+
+\begin{sol}
+$\boxed{\Rightarrow}$ We know from Proposition 1.14 that
+\[
+r(\mathfrak{a}) = \bigcap_{\mathfrak{a} \subseteq \mathfrak{p} \text{ prime}} \mathfrak{p}
+\]
+
+Therefore, $\mathfrak{a} = r(\mathfrak{a}) \imp \mathfrak{a}$ is intersection of prime ideals.
+
+$\boxed{\Leftarrow}$ Let $\mathfrak{a} = \bigcap_i \mathfrak{p}_i$. Let $x \in r(\mathfrak{a})$. Then $\exists n > 0$ such that $x^n \in \mathfrak{a} \imp x^n \in \mathfrak{p}_i \, \, \forall i \imp x \in \mathfrak{p}_i \, \, \forall i \imp x \in \mathfrak{a}$. In conclusion, $r(\mathfrak{a}) = \mathfrak{a}$.
+
+\end{sol}
+
+\begin{ex}
+	Let $A$ be a ring, $\mathfrak{R}$ its nilradical. Show that the following are equivalent:
+	\begin{enumerate}[label=(\roman*)]
+		\item $A$ has exactly one prime ideal;
+		\item Every element of $A$ is either a unit or nilpotent;
+		\item $A/\mathfrak{R}$ is a field.
+	\end{enumerate}
+\end{ex}
+
+\begin{sol}
+	$\boxed{i) \imp ii)}$ Let $\mathfrak{p}$ be the only prime ideal. Then $\mathfrak{p}$ is also maximal and $\mathfrak{R} = \bigcap_{\mathfrak{p}_i \text{ prime}} \mathfrak{p}_i = \mathfrak{p}$. As every non-unit element is contained in a maximal, and $\mathfrak{R}$ is the only maximal ideal, then every non-unit is a nilpotent.
+
+	\vspace{3mm}
+
+	\noindent $\boxed{ii) \imp iii)}$ Given $x \in A$, if $x \in \mathfrak{R}$ then $0 = \closure{x} \in A/\mathfrak{R}$. Otherwise $x$ is invertible. Therefore, every non-zero element in $A/\mathfrak{R}$ is invertible, which means that $A/\mathfrak{R}$ is a field.
+
+	\vspace{3mm}
+
+	\noindent $\boxed{iii) \imp i)}$ $A/\mathfrak{R}$ is a field $\imp \mathfrak{R} = \bigcap_{\mathfrak{p}_i \text{ prime}} \mathfrak{p}_i$ is maximal. Therefore, there can only be one prime ideal, as otherwise $\mathfrak{R} \subset \mathfrak{p}$, which would contradict $\mathfrak{R}$ maximal.
+\end{sol}
+
+\begin{ex}
+	A ring $A$ is Boolean if $x^2 = x$ for all $x \in A$. In a Boolean ring $A$, show that
+	\begin{enumerate}[label=(\roman*)]
+		\item $2x = 0$ for all $x \in A$;
+		\item every prime ideal $\mathfrak{p}$ is maximal, and $A/\mathfrak{p}$ is a field with two elements;
+		\item every finitely generated ideal in $A$ is principal.
+	\end{enumerate}
+\end{ex}
+
+\begin{sol}
+	\begin{enumerate}[label=(\roman*)]
+		\item As the ring is Boolean, $x+1 = (x+1)^2 = x^2 + 2x + 1^2 = x + 1 + 2x \imp 2x = 0$.
+		\item Let's reduce the equation $x^2 = x$ modulo a prime ideal $\mathfrak{p}$. $\closure{x}^2 = \closure{x} \imp \closure{x}(\closure{x}-1) = 0$. As $A/\mathfrak{p}$ is a domain, then either $\closure{x} = 0$ or $\closure{x} = 1$. In consequence, $A/\mathfrak{p}$ is a field with only two elements.
+		\item It's enough to prove it for an ideal generated by two elements, and the general finitely generated case follows from induction. Let $\mathfrak{a} = (x,y)$, and let's consider the element $z = x+y+xy \in \mathfrak{a}$. We observe that $zx = x^2 + xy + x^2y = x + xy + xy = x$. Analogously, $zy = y$, which implies that $x \in (z)$ and $y \in (z)$, and therefore $\mathfrak{a} = (z)$.
+	\end{enumerate}
+\end{sol}
+
+\begin{ex}
+	A local ring contains no idempotent $\neq 0, 1$.
+\end{ex}
+
+\begin{sol}
+	Let $x$ be an idempotent element of a local ring, $x^2 = x \imp x(x-1) = 0$. If $x$ is a unit, that is $\exists y$ such that $xy = 1$, then $1 = xy = x^2y = x$ and $x = 1$. Otherwise, Proposition 1.9 forces $1-x$ to be a unit. Given that $(1-x)^2 = 1-2x+x^2 = 1-x$ the same argument used with $x$ holds for $1-x$, which means that $1-x = 1$ and therefore $x = 0$.
+\end{sol}
+
+\begin{ex}
+	Let $K$ be a field and let $\Sigma$ be the set of all irreducible monic polynomials $f$ in one indeterminate with coefficients in $K$. Let $A$ be the polynomial ring over $K$ generated by indeterminates $x_f$, one for each $f \in \Sigma$. Let $\mathfrak{a}$ be the ideal of A generated by the polynomials $f(x_f)$ for all $f \in \Sigma$. Show that $\mathfrak{a} \neq (1)$.
+\end{ex}
+
+\begin{sol}
+	
+\end{sol}
+
+\begin{ex}
+	In a ring $A$, let $\Sigma$ be the set of all ideals in which every element is a zero-divisor. Show that the set $\Sigma$ has maximal elements and that every maximal element of $\Sigma$ is a prime ideal. Hence the set of zero-divisors in A is a union of prime ideals.
+\end{ex}
+
+\begin{sol}
+	Let's consider the inclusion order relation in the set $\Sigma$. $\Sigma$ is a non-empty set, as $(0) \in \Sigma$. Then, given a chain of ideals $\mathfrak{a}_i \in \Sigma$
+	\[
+		\mathfrak{a}_1 \subseteq \mathfrak{a}_2 \subseteq \dots
+	\]
+
+	The set $\bigcup_{i=1}^\infty \mathfrak{a}_i$ is an ideal that contains only divisors of zero, and therefore it's an upper bound of the chain. Then, $(\Sigma, \, \subseteq)$ satisfy the conditions of Zorn's Lemma, which guarantees the existence of maximal elements of $\Sigma$.
+
+	Let $\mathfrak{p}$ be a maximal element of $\Sigma$. Suppose $\mathfrak{p}$ is not prime. Then, $\exists x,y \notin \mathfrak{p}$ such that $xy \in \mathfrak{p}$. As $xy$ is a zero divisor, $\exists z \neq 0$ such that $xyz = 0$, which implies that either $x$, $y$ or both are zero divisors. Without loss of generality we suppose that $x$ is a zero divisor, and we consider the ideal $\mathfrak{p}' = (x) + \mathfrak{p}$. Every element $a \in \mathfrak{p}'$ is a zero divisor, as $ay \in \mathfrak{p}$, and as $\mathfrak{p} \subset \mathfrak{p}'$, that is a contradiction with the maximality of $\mathfrak{p}$ in $\Sigma$.
+
+	Therefore, every maximal element of $\Sigma$ is a prime ideal and hence the set of zero-divisors in A is a union of prime ideals (the maximal elements of $\Sigma$).
+\end{sol}
+
+\begin{ex}
+	Let $A$ be a ring and let $X$ be the set of all prime ideals of $A$. For each subset $E$ of $A$, let $V(E)$ denote the set of all prime ideals of A which contain E. Prove that
+	\begin{enumerate}[label=(\roman*)]
+		\item if $\mathfrak{a}$ is the ideal generated by $E$, then $V(E) = V(\mathfrak{a}) = V(r(\mathfrak{a}))$.
+		\item $V(0) = X$, $V(1) = \emptyset$.
+		\item if $(E_i)_{i \in I}$ is any family of subsets of $A$, then
+			\[
+				V \left ( \bigcup_{i \in I} E_i \right ) = \bigcap_{i \in I} V(E_i)
+			\]
+		\item $V(\mathfrak{a} \cap \mathfrak{b}) = V(\mathfrak{a}\mathfrak{b}) = V(\mathfrak{a}) \cup V(\mathfrak{a})$ for any ideals $\mathfrak{a}$, $\mathfrak{b}$ of $A$.
+	\end{enumerate}
+
+	These results show that the sets $V(E)$ satisfy the axioms for closed sets in a topological space. The resulting topology is called the \textit{Zariski topology}. The topological space $X$ is called the \textit{prime spectrum} of A, and is written Spec($A$).
+\end{ex}
+
+\begin{sol}
+	\begin{enumerate}[label=(\roman*)]
+		\item If $\mathfrak{p}$ is a prime ideal such that $E \subseteq \mathfrak{p} \imp \mathfrak{a} \subseteq \mathfrak{p}$, as $\mathfrak{a}$ is the smallest ideal containing $E$. On the other hand, it's clear that $\mathfrak{a} \supseteq E$, and then $\mathfrak{p} \supseteq \mathfrak{a} \imp \mathfrak{p} \supseteq E$. In conclusion, $V(E) = V(\mathfrak{a})$.
+
+		Let's now prove the other equality. On one hand, from $r(\mathfrak{a}) \supseteq \mathfrak{a}$ follows the inclusion $V(\mathfrak{a}) \supseteq V(r(\mathfrak{a}))$. On the other hand, as 
+		\[
+			r(\mathfrak{a}) = \bigcap_{\mathfrak{p} \supseteq \mathfrak{a}} \mathfrak{p}
+		\]
+
+		it's clear that every prime ideal containing $\mathfrak{a}$ will also contain $r(\mathfrak{a})$, which proves the inclusion $V(\mathfrak{a}) \subseteq V(r(\mathfrak{a}))$.
+
+		\item $0$ is contained in every ideal $\imp V(0) = X$, and $1$ is not contained in any prime ideal $\imp V(1) = \emptyset$.
+
+		\item $\ip \in V(\bigcup_{i \in I} E_i \iff \bigcup_{i \in I} E_i \subseteq \ip \iff E_i \subseteq \ip \, \, \forall i \iff \ip \in V(E_i) \, \, \forall i \iff \ip \in \bigcap_{i \in I} V(E_i)$.
+
+		\item $\ip \in V(\ia \cap \ib) \imp \ia \cap \ib \subseteq \ip$. As $\ip$ is prime, by Preposition 1.11 either $\ia \subseteq \ip$ or $\ib \subseteq \ip$, which implies that $\ip \in V(\ia \ib)$ and $\ip \in V(\ia) \cup V(\ib)$. That proves the inclusions $V(\ia \cap \ib) \subseteq V(\ia \ib)$ and $V(\ia \cap \ib) \subseteq V(\ia) \cup V(\ib)$.
+
+		Let $\ia \ib \subseteq \ip$. $x \in \ia \cap \ib \imp x^2 \in \ia \ib \subset \ip \imp x \in \ip$. Therefore, $\ia \cap \ib \subseteq \ip$, which proves the inclusion $V(\ia \ib) \subseteq V(\ia \cap \ib)$.
+
+		Let $\ip \in V(\ia) \cup V(\ib)$. Without loss of generality let's suppose that $\ip \supseteq \ia \imp \ia \cap \ib \subseteq  \ia \subseteq \ip \imp \ip \in V(\ia \cap \ib)$. This proves the inclusion $V(\ia \cap \ib) \supseteq V(\ia) \cup V(\ib)$.
+
+	\end{enumerate}
+\end{sol}
+
+\begin{ex}
+	Draw pictures of Spec$(\Z)$, Spec$(\R)$, Spec$(\C[x])$, Spec$(\R[x])$, Spec$(\Z[x])$.
+\end{ex}
+
+\begin{sol}
+	\begin{enumerate}[label=(\roman*)]
+		\item The prime ideals of $\Z$ are $(0)$ and $(p)$, with $p$ prime. Any finite set of primes $p_1, \dots, p_n$ correspond to a set in Spec$(\Z)$, $Y = \{(p_1), \dots, (p_n)\}$. Let's consider the ideal $\ia = (p_1p_2 \cdots p_n)$, and clearly $\ia \subseteq (p_i) \, \, \forall i$, and by the uniqueness of prime descomposition $\nexists \mathfrak{q} \neq (p_i)$ prime such that $\ia \subseteq \mathfrak{q}$, which implies that $V(\ia) = Y$. As every ideal is principal the inverse reasoning also holds. In conclusion, the closed sets of the topology are Spec$(\Z)$, $\emptyset$ and all finite subsets of Spec($\Z$) not containing $(0)$.
+
+		\item $\R$ has only one prime ideal $(0)$, so Spec$(\R)$ is a topological space with only one point.
+
+		\item In $\C[x]$ every element factorizes as a product of linear factors. Therefore, the prime ideals are $(x-\alpha), \, \, \forall \alpha \in \C$, and $(0)$. Then, Spec$(\C[x])$ can be identified with the complex plane and an extra point corresponding to $(0)$. By the same reasoning used for the case of $\Z$, the closed sets of the topology are all finite subsets of $\C$, Spec$(\C[x])$ and $\emptyset$.
+
+		\item $\R[x]$ is a principal ideal domain, and therefore the prime ideals are those generated by an irreducible element. Irreducible polynomials are $(0)$, $x-a, \, \, \forall a \in \R$ and $x^2 +bx +c$, with $b^2-4c < 0$. The closed subsets are again all finite sets of prime ideals not containing $(0)$.
+
+		\item The prime ideals of $\Z[x]$ are $(0)$, $(p)$, with $p \in \Z$ prime, $(f)$, with $f$ an irreducible polynomial and $(p,f)$, with $p \in \Z$ prime and $f \in \Z[x]$ irreducible.
+	\end{enumerate}
+\end{sol}
+
+\begin{ex}
+	For each $f \in A$, let $X_f$ denote the complement of $V(f)$ in $X = \text{Spec}(A)$. The sets $X_f$ are open. Show that they form a basis of open sets for the Zariski topology, and that
+	\begin{enumerate}[label=(\roman*)]
+		\item $X_f \cap X_g = X_{fg}$
+		\item $X_f = \emptyset \iff f$ is nilpotent
+		\item $X_f = X \iff f$ is a unit
+		\item $X_f = X_g \iff r((f)) = r((g))$
+		\item $X$ is quasi-compact (every open covering of $X$ has a finite subcovering)
+		\item More generally, each $X_f$ is quasi-compact
+		\item An open subset of $X$ is quasi-compact if and only if it is a finite union of sets $X_f$
+	\end{enumerate}
+	The sets $X_f$ are called \textit{basic open sets} of $X = \text{Spec}(A)$.
+\end{ex}
+
+\begin{sol}
+	The sets $X_f$ are open because their complementaries are closed sets. Let's first prove that $X_f$ are a basis of the topogoly, that is, $\forall U \in \mathcal{T}, \, U = \bigcup_i X_{f_i}$. Indeed, $U \in \mathcal{T} \imp U = X \ V(E)$ for a certain $E$. Then $U = \{ \ip \text{ such that } E \not \subset \ip \} = \{\ip \text{ such that } \exists f \in E, \, f \notin \ip \}$.
+	\[
+		U = \bigcup_{f \in E} X \ V(f) = \bigcup_{f \in E} X_f
+	\]
+
+	\begin{enumerate}[label=(\roman*)]
+		\item $\ip \in X_f \cap X_g \imp f \notin \ip, \, g \notin \ip$. As $\ip$ is prime, that implies $fg \notin \ip \imp \ip \in X_{fg}$, which proves the inclusion $X_f \cap X_g \subseteq X_{fg}$.
+
+		Conversely, $\ip \in X_{fg} \imp f \notin \ip, \, g \notin \ip$, and therefore $\ip \in X_f$, $\ip \in X_g$, which proves the inclusion $X_f \cap X_g \supseteq X_{fg}$.
+
+		\item $X_f = \emptyset \iff V(f) = \text{Spec}(A) \iff f \in \ip \, \, \forall \ip$ prime $\iff f \in \bigcap_{\ip \text{ prime}} \ip = \mathcal{N} \iff f$ is nilpotent.
+
+		\item $X_f = X \iff V(f) = \emptyset \iff \nexists \ip$ prime such that $f \in \ip$. It's clear that units satisfy this propiety, as $f$ unit $\imp (f) = A$. Conversely, if $f$ is not unit, $f \in \im$ maximal (and in particular prime), by Theorem 1.3. In conclusion, $X_f = X \iff f$ is a unit.
+
+		\item It is immediate from the characterization $r((f)) = \bigcap_{f \in \ip \text{ prime}} \ip$. 
+
+		\item Let's consider an open covering of $X$. As we have shown that $X_f$ are a basis of the topology, without loss of generality we can consider a basic covering
+		\[
+			X = \bigcup_{i \in I} X_{f_i} =  \bigcup_{i \in I} X \setminus V(f_i) = X \setminus \bigcap_{i \in I} V(f_i) \iff
+		\]
+
+		\[
+			\iff \bigcap_{i \in I} V(f_i) = \emptyset \iff V(\bigcup_{i \in I} f_i) = \emptyset \iff (f_i)_i = A
+		\]
+
+		That means that $1 = \sum_{i \in J} g_i f_i$, for a certain $J$ with $\#J < \infty$. Following the implications in opposite direction, we conclude that $\{ X_{f_i} \}_{i \in J}$ covers $X$, that is, we have found a finite subcovering and we can conclude that $X$ is quasi-compact.
+
+		\item The reasoning is the same as in the previous part.
+		\[
+			X_f = \bigcup_{i \in I} X_{f_i} = X \setminus \bigcap_{i \in I} V(f_i) \imp V(\bigcup_{i \in I} f_i) = V(f)
+		\]
+		
+		which means that $f = \sum_{i \in J} g_i f_i$, for a certain $J$ with $\#J < \infty$, and therefore $\{ X_{f_i} \}_{i \in J}$ covers $X_f$.
+
+		\item $\boxed{\Rightarrow}$ It follows from the definition of quasi-compatness.
+
+		\noindent $\boxed{\Leftarrow}$ $U = \bigcup_{i = 1}^n X_{f_i}$. As $X_f$ are a basis of the topology, given any open covering of $U = \bigcup_{j \in J} V_j$ each $V_j$ will be the union of some $X_{f_i}$, and therefore we can extract a finite covering.
+	\end{enumerate}
+\end{sol}
+
+
+\begin{ex}
+For psychological reasons it is sometimes convenient to denote a prime ideal of $A$ by a letter such as $x$ or $y$ when thinking of it as a point of $X = \text{Spec}(A)$. When thinking of $x$ as a prime ideal of $A$, we denote it by $\ip_x$ (logically, of course,
+it is the same thing). Show that
+	\begin{enumerate}[label=(\roman*)]
+		\item The set $\{x\}$ is closed in Spec$(A)$ $\iff \ip_x$ is maximal.
+		\item $\closure{\{x\}} = V(\ip_x)$.
+		\item $y \in \closure{\{x\}} \iff \ip_x \subseteq \ip_y$
+		\item X is a $T_0$ space (this means that if $x$, $y$ are distinct points of $X$, then either there is a neighborhood of $x$ which does not contain $y$, or else there is a neighborhood of $y$ which does not contain $x$).
+	\end{enumerate}
+\end{ex}
+
+\begin{sol}
+	\begin{enumerate}[label=(\roman*)]
+		\item $\{x\}$ is closed in Spec$(A)$ $\iff x = V(\ip_x) \iff \nexists \iq$ prime such that $\iq \supset \ip_x \imp \ip_x$ is maximal.  
+		\item $(\ip_x)$ is closed and contains $x$. Given $V(\ip)$ a closed set containing $x$, $\ip_x \supseteq \ip \imp V(\ip_x) \subseteq V(\ip)$, so $V(\ip)$ also contains $V(\ip_x)$, and therefore $\closure{\{x\}} = V(\ip_x)$.
+		\item $y \in \closure{\{x\}} \iff y \in V(\ip_x) \iff \ip_x \subseteq \ip_y$.
+		\item Let $x$, $y$ be distinct points of $X$, then either $\exists f \in \ip_x$ such that $f \notin \ip_y$, or $\exists f \in \ip_y$ such that $f \notin \ip_x$. Let's suppose we have the first case (the other is symmetric). Therefore, $x \notin X_f$ but $y \in X_f$, and therefore $X_f$ is the neighborhood we were looking for. 
+	\end{enumerate}
+\end{sol}
+
+\begin{ex}
+A topological space $X$ is said to be \textit{irreducible} if $X \neq \emptyset$ and if every pair of non-empty open sets in $X$ intersect, or equivalently if every non-empty open set is dense in $X$. Show that Spec$(A)$ is irreducible if and only if the nilradical of A is a prime ideal.
+\end{ex}
+
+\begin{sol}
+We already know by problem 1.17 that $X_f = 0 \iff f$ belongs to the nilradical. 
+
+\noindent $\boxed{\Leftarrow}$ Let's suppose that $X$ is not irreducible, that is $\exists U = \bigcup_i X_{f_i} \neq \emptyset \, V = \bigcup_j X_{g_j} \neq \emptyset$ two open sets such that $U \cap V = \emptyset$. Without loss of generality, we can take $X_{f_i}, X_{g_j} \neq \emptyset \, \, \forall i,j$. Then, $\bigcup_{i,j} X_{f_i} \cap X_{g_j} = \emptyset \imp$ $X_{f_i} \cap X_{g_j} = \emptyset \, \, \forall i,j$. As the nilradical $\ip_{\mathcal{N}}$ is prime, $f \notin \ip_{\mathcal{N}} \imp \mathcal{N} \in X_f$. Therefore, either $f_i$ or $g_j$ belong to the nilradical $\imp X_{f_i}$ or $X_{g_j} = \emptyset$, which is a contradiction.
+
+\noindent $\boxed{\Rightarrow}$ $fg \in \mathcal{N} \imp X_{fg} = \emptyset$, and $X_{fg} = X_f \cap X_g$. As Spec$(A)$ is irreducible $\imp$ either $X_f = \emptyset$ or $X_g = \emptyset$, that is, either $f \in \mathcal{N}$ or $g \in \mathcal{N}$, which proves that $\mathcal{N}$ is prime.
+\end{sol}
+
+\begin{ex}
+	Let $X$ be a topological space.
+	\begin{enumerate}[]
+		\item If $Y$ is an irreducible (Exercise 19) subspace of $X$, then the closure $\closure{Y}$ of $Y$ in $X$ is irreducible.
+		\item Every irreducible subspace of $X$ is contained in a maximal irreducible subspace.
+		\item The maximal irreducible subspaces of $X$ are closed and cover $X$. They are called the \textit{irreducible components} of X. What are the irreducible components of a Hausdorff space?
+		\item If $A$ is a ring and $X = \text{Spec}(A)$, then the irreducible components of $X$ are the closed sets $V(\ip)$, where $\ip$ is a minimal prime ideal of $A$ (Exercise 8).
+\end{enumerate}
+\end{ex}
+
+\begin{sol}
+	Let $X$ be a topological space.
+	\begin{enumerate}[label=(\roman*)]
+		\item Let $U_1, U_2 \neq \emptyset$ be open subsets of $\closure{Y}$. By definition of closure, $U_i \cap Y \neq \emptyset$. Therefore, as $Y$ is irreductible, $(U_1 \cap Y) \cap (U_2 \cap Y) \neq \emptyset$. In particular, $U_1 \cap U_2 \neq \emptyset$, which proves that $\closure{Y}$ is irreducible.
+
+		\item Let $\Sigma$ be the set of all irreducible subspaces. We observe that the singletons $\{x\}$ are irreducible subspaces, and therefore $\Sigma \neq \emptyset$. Suppose we have a chain of subspaces $X_i \in \Sigma$, $X_1 \subseteq X_2 \subseteq \dots$. We will prove that $\bigcup_{i} X_i$ is also irreducible, and therefore the conditions of Zorn's Lemma apply to $\Sigma$ and the existence of maximal elements is proven.
+
+		Let $U_1, U_2 \neq \emptyset$ be open subsets of $\bigcup_{i} X_i$, and $x_i \in U_i$. Therefore, $\exists k,l$ such that $x_1 \in X_{k}$ and $x_2 \in X_{l}$. Therefore, $(U_i \cap X_{max\{k,l\}}) \neq \emptyset$ and are open subsets of $X_{max\{k,l\}}$, and therefore $(U_1 \cap X_{max\{k,l\}}) \cap (U_2 \cap X_{max\{k,l\}}) \neq \emptyset$. In particular, $U_1 \cap U_2 \neq \emptyset$, which proves that $\bigcup_{i} X_i$ is irreducible.
+
+		\item Let $Y$ be a maximal irreducible subspace. As $Y \subseteq \closure{Y}$ which is also irreducible by i), we must have $Y = \closure{Y}$, or otherwise we would reach a contradiction with the maximality of $Y$. This proves that $Y$ is closed.
+
+		Now, let's consider the case of a Hausdorff space, where $\forall x,y \exists U_x, U_y$ with $x \in U_x, y \in U_y$ such that $U_x \cap U_y = \emptyset$, which means that $x,y \notin$ the same irreducible component. Therefore, the maximal irreducible components are the points of the space.
+
+		\item First, the closed sets $V(\ip)$, where $\ip$ is a minimal prime ideal of $A$ are irreducible, because all open sets will be $U = V(\ip) \setminus V(E)$, and therefore $\ip \in$ all non-empty open sets. They're also maximal, as otherwise, $ \exists \ia$ such that $V(\ip) \subseteq V(\ia) \iff \ia \subseteq \ip$ and $\exists \ip_1 \in V(\ia), \, \ip_2 \notin V(\ip)$, which implies that $\ip_1 \subset \ip$, a contradiction with the minimality of $\ip$.
+
+		On the other hand, given an irreducible component $Y$, $Y$ is closed by ii), and therefore $Y = V(\ia) = V(r(\ia))$. Let's prove that $r(\ia)$ must be a minimal prime ideal. First of all, let's see that if $r(\ia)$ is prime, it must be a minimal prime. Otherwise, $\exists \ip_{min} \subset r(\ia)$ minimal prime ideal, and therefore $V(\ip_min) \supset V(\ia)$, which contradicts the maximality of $V(\ia)$. 
+
+		Now let's prove that $r(\ia)$ must be prime. Let $fg \in r(\ia) \imp fg \in \ip_x \, \, \forall x \in V(\ia)$, and therefore $X_{fg} = X_f \cap X_g = \emptyset$ by exericise 17. The irreductibility of $V(\ia)$ implies that either $X_f$ or $X_g$ are empty, which ensures that either $f$ or $g$ $\in r(\ia)$, and therefore $r(\ia)$ is prime.
+\end{enumerate}
+\end{sol}
+
+\begin{ex}
+	Let $\phi: A \to B$ be a ring homomorphism. Let $X = \text{Spec}(A)$ and $Y = \text{Spec}(B)$. If $\iq \in Y$, then $\phi^{-1}(\iq)$ is a prime ideal of A, i.e., a point of X. Hence $\phi$ induces a mapping $\phi^*: Y \to X$. Show that
+	\begin{enumerate}[label=(\roman*)]
+		\item If $f \in A$ then ${\phi^*}^{-1}(X_f) = Y_{\phi(f)}$, and hence that $\phi^*$ is continuous.
+		\item If $\ia$ is an ideal of $A$, then ${\phi^*}^{-1}(V(\ia)) = V(\ia^e)$.
+		\item If $\ib$ is an ideal of $B$, then $\closure{\phi^*(V(\ib))} = V(\ib^c)$.
+		\item If $\phi$ is surjective, then $\phi^*$ is a homeomorphism of $Y$ onto the closed subset $V(\ker(\phi))$ of $X$. (In particular, Spec$(A)$ and Spec$(A/\mathfrak{R})$ (where $\mathfrak{R}$ is the nilradical of $A$) are naturally homeomorphic.)
+		\item If $\phi$ is injective, then $\phi^*(Y)$ is dense in $X$. More precisely, $\phi^*(Y)$ is dense in $X \iff Ker(\phi) \subseteq \mathfrak{R}$.
+		\item Let $\psi: B \to C$ be another ring homomorphism. Then $(\psi \circ \phi)^* = \phi^* \circ \psi^*$.
+		\item Let $A$ be an integral domain with just one non-zero prime ideal $\ip$, and let $K$ be the field of fractions of $A$. Let $B = (A/\ip) \times K$. Define $\phi: A \to B$ by $\phi(x) = (\bar{x}, x)$, where $\bar{x}$ is the image of $x$ in $A/\ip$. Show that $\phi^*$ is bijective but not a homeomorphism.
+	\end{enumerate}
+\end{ex}
+
+\begin{sol}
+	\begin{enumerate}[label=(\roman*)]
+		\item $y \in {\phi^*}^{-1}(X_f) \iff \phi^*(y) \in X_f \iff f \notin \phi^{-1}(\ip_y) \iff \phi(f) \notin \ip_y \iff y \in Y_{\phi(f)}$. Therefore, ${\phi^*}^{-1}(X_f) = Y_{\phi(f)}$, and as $X_f$ is a base of the topology, the antiimage of an arbitraty open subset is open, which proves that $\phi^*$ is countinuous.
+
+		\item $y \in {\phi^*}^{-1}(V(\ia)) \iff \phi^*(y) \in V(\ia) \iff \phi^{-1}(\ip_y) \supseteq \ia \iff \ip_y \supseteq \ia^e \iff y \in V(\ia^e)$. Per tant, ${\phi^*}^{-1}(V(\ia)) = V(\ia^e)$.
+
+		\item $\closure{\phi^*(V(\ib))} = V(\ia)$, for some ideal $\ia$ yet to determine. We observe that $x \in \phi^*(V(\ib)) \iff \exists y \in \text{Spec}(B)$ such that $\ip_y \supseteq \ib$ and $\ip_x = \ip_y^c$. Then, it's clear that $\ia \subseteq \ip^c, \, \, \forall \ip \supseteq \ib$, which implies that $\ia \subseteq \bigcap_{\ip \supseteq \ib} \ip^c$. As the closure is the smallest closed subset containing $\phi^*(V(\ib))$, we have the equality 
+		\[
+			\closure{\phi^*(V(\ib))} = V \left ( \bigcap_{\iq \supseteq \ib} \iq^c \right )
+		\]  
+
+		Using now Exercise 1.18 of the theory section, and Problem 1.15 i) we have that 
+		\[
+			V \left ( \bigcap_{\iq \supseteq \ib} \iq^c \right ) = V \left (  \left ( \bigcap_{\iq \supseteq \ib} \iq \right )^c \right ) = V(r(\ib)^c) = V(r(\ib^c)) = V(\ib^c)
+		\]
+
+		\item If $\phi$ is surjective, then $A/\ker(\phi) \cong B$, and therefore $\exists$ a bijective correspondence between prime ideals of $B$ prime ideals of $A/\ker(\phi)$, which correspond to prime ideals of $A$ containing $\ker(\phi)$. That proves $Y \overset{\phi^*}{\cong} V(\ker(\phi))$.
+
+		Therefore, we already know that $\phi^*: Y \to V(\ker(\phi))$ is bijective and continuous. Now we have to prove that the inverse ${\phi^*}^{-1}: V(\ker(\phi)) \to Y$ is also continuous. Let $V(\ib)$ be an arbitrary closed set of $Y$. Let's check that its antiimage by ${\phi^*}^{-1}$ is also closed. Indeed, $\ip \in V(\ib) \iff \ip \supseteq \ib \iff ({\phi^*}^{-1})^{-1}(\ip) \supseteq ({\phi^*}^{-1})^{-1}(\ib) \imp {\phi^*}^{-1}(\ip) \supseteq \ib^c  \iff \ip^c  \in V(\ib^c) \imp ({\phi^*}^{-1})^{-1}(V(\ib)) = V(\ib^c)$.
+
+		\item $\phi^*(Y)$ is dense in $X \iff \closure{\phi^*(Y)} = X$. We also know that
+		\[
+			\closure{\phi^*(Y)} = \closure{\phi^*(V((0)))} = V((0)^c) = V(\ker(\phi))
+		\]
+
+		Therefore, we only have to show that $V(\ker(\phi)) = X \iff \ker(\phi) \subseteq \mathfrak{R}$. That is true because $V(\ker(\phi)) = X \iff \ip \supseteq \ker(\phi) \, \, \forall \ip \text{ prime } \iff \bigcap_{\ip \text{ prime}} \ip \supseteq \ker(\phi) \iff \ker(\phi) \subseteq \mathfrak{R}$.
+
+		\item Let $\ip \in \Spec(C)$. Then $(\psi \circ \phi)^*(\ip) = (\psi \circ \phi)^{-1}(\ip) = \phi^{-1}(\psi^{-1}(\ip)) = \phi^*(\psi^{*}(\ip)) = (\phi^* \circ \psi^*)(\ip)$.
+
+		\item The prime ideals of $\Spec(B)$ are $\ip_1 = (0,K)$ and $\ip_2 = (A/\ip, 0)$. We have that $\phi^*(\ip_1) = \ip$ and $\phi^*(\ip_2) = (0)$, and therefore $\phi^*$ is clearly bijective. However, we will prove that ${\phi^*}^{-1}$ is not continuous, as $({\phi^*}^{-1})^{-1}(\ip_2) = (0)$ which is not a closed subset, while $\ip_2$ is closed.
+	\end{enumerate}
+\end{sol}

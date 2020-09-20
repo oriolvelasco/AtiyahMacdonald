@@ -1,0 +1,25 @@
+\section{Modules}
+
+\begin{ex}
+	Show that $(\Z/m\Z) \otimes (\Z/n\Z) = 0$ if $m, n$ are coprime.
+\end{ex}
+
+\begin{sol}
+	By Bézout's Identity, we know that, as $m,n$ are coprime, $\exists$ $a,b \in \Z$ such that $am+bn = 1$. Then, $\forall x \otimes y \in (\Z/m\Z) \otimes (\Z/n\Z)$ we have that 
+	$
+	x \otimes y = 1(x \otimes y) = (am+bn)(x \otimes y) = am(x \otimes y) + bn(x \otimes y) = amx \otimes y + x \otimes bny = 0
+	$.
+\end{sol}
+
+\begin{ex}
+	Let $A$ be a ring, $\ia$ an ideal, $M$ an $A$-module. Show that $(A/\ia) \otimes_A M$ is isomorphic to $M/\ia M$.
+\end{ex}
+
+\begin{sol}
+	Let's tensor the exact sequence $\xrightarrow[]{} \ia \xrightarrow[]{incl} A \xrightarrow[]{\pi}  A/\ia \xrightarrow[]{}  0$, and we obtain the following sequence, which is exact by Proposition 1.18.
+	\[
+		\ia \otimes M \xrightarrow[]{incl \otimes 1} A \otimes M \xrightarrow[]{\pi \otimes 1}  A/\ia  \otimes M \xrightarrow[]{} 0
+	\]
+
+	Therefore, that induces an isomorphism $A \otimes M / \ia \otimes M \cong A/\ia \otimes M$. On the other hand, let's consider the application $\varphi: \ia \otimes M \to \ia M$ defined by $\varphi(a \otimes m) = am$. It's clear that $\varphi$ is exhaustive. Let's check the injectivity: $ax = 0 \imp 0 = 1 \otimes ax = a(1 \otimes x) = a \otimes x$, and therefore $\ker(\varphi) = (0)$ and that induces an isomorphism $\ia \otimes M \cong \ia M$. The same argument for 
+\end{sol}
