@@ -1,4 +1,5 @@
 \section{Modules}
+%Falta problema 11 ii)
 
 \begin{ex}
 	Show that $(\Z/m\Z) \otimes (\Z/n\Z) = 0$ if $m, n$ are coprime.
@@ -16,10 +17,175 @@
 \end{ex}
 
 \begin{sol}
-	Let's tensor the exact sequence $\xrightarrow[]{} \ia \xrightarrow[]{incl} A \xrightarrow[]{\pi}  A/\ia \xrightarrow[]{}  0$, and we obtain the following sequence, which is exact by Proposition 1.18.
+	Let's tensor the exact sequence $\ia \xrightarrow[]{incl} A \xrightarrow[]{\pi}  A/\ia \xrightarrow[]{}  0$, and we obtain the following sequence, which is exact by Proposition 2.18.
 	\[
 		\ia \otimes M \xrightarrow[]{incl \otimes 1} A \otimes M \xrightarrow[]{\pi \otimes 1}  A/\ia  \otimes M \xrightarrow[]{} 0
 	\]
 
-	Therefore, that induces an isomorphism $A \otimes M / \ia \otimes M \cong A/\ia \otimes M$. On the other hand, let's consider the application $\varphi: \ia \otimes M \to \ia M$ defined by $\varphi(a \otimes m) = am$. It's clear that $\varphi$ is exhaustive. Let's check the injectivity: $ax = 0 \imp 0 = 1 \otimes ax = a(1 \otimes x) = a \otimes x$, and therefore $\ker(\varphi) = (0)$ and that induces an isomorphism $\ia \otimes M \cong \ia M$. The same argument for 
+	Therefore, that induces an isomorphism $A \otimes M / \ia \otimes M \cong A/\ia \otimes M$. On the other hand, let's consider the application $\varphi: \ia \otimes M \to \ia M$ defined by $\varphi(a \otimes m) = am$. It's clear that $\varphi$ is exhaustive. Let's check the injectivity: $ax = 0 \imp 0 = 1 \otimes ax = a(1 \otimes x) = a \otimes x$, and therefore $\ker(\varphi) = (0)$ and that induces an isomorphism $\ia \otimes M \cong \ia M$. We also know that $A \otimes M \cong M$ by Proposition 2.14. Taking into account all these isomorphisms we finally get
+	\[
+		A/\ia \otimes M \cong A \otimes M / \ia \otimes M \cong M/\ia M
+	\]
 \end{sol}
+
+\begin{ex}
+ Let $A$ be a local ring, $M$ and $N$ finitely generated $A$-modules. Prove that if $M \otimes N = 0$, then $M = 0$ or $N = 0$.
+\end{ex}
+
+\begin{sol}
+Let $k = A/\im$, where $\im$ is the maximal ideal of A. Then, let's consider $M_k = k \otimes M$ and $N_k = k \otimes N$, which have an structure of k-vector spaces by extension of scalars. We observe that
+\[
+	M \otimes_A N = 0 \imp (M \otimes_A N)_k = 0 \imp M_k \otimes_k N_k = 0
+\] 
+
+As $M_k$ and $N_k$ are vector spaces, then $M_k \otimes_k N_k = 0 \imp M_k$ or $N_k = 0$, as otherwise $\exists u \neq 0 \in M_k , \, v \neq 0 \in N_k$. Then $\exists f,g$ linear applications such that $f: M_k \to k$, $g: N_k \to k$ such that $f(u) = 1$ and $g(v) = 1$. Then the application $\phi: M_k \times N_k \to k$ defined by $\phi(a,b) = f(a)g(b)$ is bilinear, and by the fundamental property of tensor product (Proposition 2.12), $\exists \phi': M_k \times N_k$ linear such that $\phi'(u \otimes v) = f(u)g(v) = 1$, and by linearity of $\phi'$ that implies that $u \otimes v \neq 0$.
+
+So we have proven that either $M_k$ or $N_k = 0$. Without loss of generality, let's suppose $M_k = 0 \imp M \otimes k = 0$ as an $A$-module. By exercise 2, that implies that $M/\im M = 0$ which means that $\im M = M$. But $\im$ is in fact the Jakobson radical, as $A$ is local, and therefore by Nakayama's Lemma we have that $M = 0$. 
+\end{sol}
+
+\begin{ex}
+	Let $M_i$ $(i \in I)$ be any family of $A$-modules, and let $M$ be their direct sum. Prove that $M$ is flat $\iff$ each $M_i$ is flat.	
+\end{ex}
+
+\begin{sol}
+    $M$ is flat $\iff \forall$ exact sequence $0 \to N' \to N \to N'' \to 0$ the exact sequence $0 \to N' \otimes M \to N \otimes M \to N'' \otimes M \to 0$ is exact. But it's clear that the sequence
+	\[
+		0 \to \bigoplus_{i \in I} N'_i \to \bigoplus_{i \in I} N_i \to \bigoplus_{i \in I} N''_i \to 0
+	\]
+	is exact $\iff$ each sequence $0 \to N'_i \to N_i \to N''_i \to 0$ is exact. Then it's enough to prove that $N \otimes (\bigoplus_{i \in I} M_i) \cong \bigoplus_{i \in I} (N \otimes M_i)$.  That is the infinite case of Proposition $2.14 iii)$, and a proof can be found here\footnote{https://math.stackexchange.com/questions/563727/tensor-product-and-direct-sum}.
+
+	%Indeed, let's proceed in a similar way as in Proposition 2.14 and we consider the application $f: N \times \bigoplus_{i \in I} M_i \to \bigoplus_{i \in I} N \otimes M_i$ defined by $f(x,(y_i)_{i \in I}) = (x \otimes y_i)_{i \in I}$. This application is bilinear and therefore induces a module homomorphism $f': N \otimes \bigoplus_{i \in I} M_i \to \bigoplus_{i \in I} N \otimes M_i$ such that $f'(x \otimes (y_i)_{i \in I}) = (x \otimes y_i)_{i \in I}$.
+
+	%On the other side, we consider the applications $g_i: N \times M_i \to N \otimes \bigoplus_{i \in I} M_i$ defined by $g_i(x,y) = x \otimes incl_i(y)$, where $incl_i: M_i \to M$ is the natural inclusion. These applications are bilinear and theefore induce applications $g'_i: N \otimes M_i \to N \otimes \bigoplus_{i \in I} M_i$, with $g'_i(x \otimes y) = x \otimes incl_i(y)$. Then, we define $g': \bigoplus_{i \in I} (N \otimes M_i) \to N \otimes \bigoplus_{i \in I} M_i$ such that $g'(x_i \otimes y_i) = \sum_i g'_i((x_i \otimes y_i)_{i \in I})$
+
+	%Now, we will check that $g'$ and $f'$ are inverse morphisms. Indeed, 
+	%\[
+	%	f'(g'((x_i \otimes y_i)_i)) = f'(\sum_i g'_i(x_i \otimes y_i)) = \sum_i f'(x_i \otimes incl_i(y_i)) = (x_i \otimes y_i)_i
+	%\]
+
+	%\[
+	%	g'(f'(x \otimes (y_i)_{i})) = g'((x \otimes y_i)_{i}) = \sum_i x \otimes incl(y_i) = x \otimes \sum_i incl(y_i) = x \otimes (y_i)_{i}
+	%\]
+\end{sol}
+
+\begin{ex}
+Let $A[x]$ be the ring of polynomials in one indeterminate over a ring $A$. Prove that $A[x]$ is a flat $A$-algebra.
+\end{ex}
+
+\begin{sol}
+	The elements of $A[x]$ are finite sums of elements of the form $a_i x^i$, with $a_i \in A$. Therefore we have that $A[x] \cong \bigoplus_{i \geq 0} A$. Taking into account that $A$ is a flat $A$-module, because $A \otimes M \cong M$, and applying Exercise 4 we get that also $\bigoplus_{i \geq 0} A \cong A[x]$ is a flat $A$-module. 
+\end{sol}
+
+\begin{ex}
+	For any $A$-module, let $M[x]$ denote the set of all polynomials in $x$ with coefficients in $M$, that is to say expressions of the form
+	\[
+		m_0 + m_1 x + \dots + m_r x^r \, \, m_i \in M
+	\]
+
+	Defining the product of an element of $A[x]$ and an element of $M[x]$ in the obvious way, show that $M[x]$ is an $A[x]$-module.
+
+	Show that $M[x] \cong A[x] \otimes_A M$.
+\end{ex}
+
+\begin{sol}
+	Defining the product of polynomials in the usual way, it's clear that $M[x]$ is an $A[x]$ module, because $M$ is closed under product by elements of $A$ and therefore $M[x]$ is closed under product of elements of $A[x]$.
+
+	Now let's consider the application $f: A[x] \times M \to M[x]$ defined by $f(\sum_i a_i x^i, m) = \sum_i a_i m x^i$, which is bilinear. Then that induces an A-module homomorphism $f': A[x] \otimes M \to M[x]$ such that $f'((\sum_i a_i x^i) \otimes m) = \sum_i a_i m x^i$. Let's prove that it is in fact an isomorphism:
+	\begin{itemize}
+		\item \textbf{Surjectivity:} Given any element $\sum_i m_i x^i \in M[x]$, we consider the element $\sum_i (x^i \otimes m_i) \in A[x] \otimes M$ as it is a module and therefore closed under linear combinations. Then $f'(\sum_i (x^i \otimes m_i)) = \sum_i (f'(x_i \otimes m_i)) = \sum_i m_i x^i$, and therefore f' is surjective.
+
+		\item \textbf{Injectivity:} Suppose that $\sum_i (a_i m)x^i = 0 \imp a_i m = 0 \, \, \forall i$. Therefore, $(\sum_i a_i x^i) \otimes m = \sum_i (a_i x^i \otimes m) = \sum_i (x^i \otimes a_i m) = 0$. That proves the injectivity of $f'$.
+	\end{itemize}
+
+	In conclusion, we have shown that $M[x] \cong A[x] \otimes_A M$.
+\end{sol}
+
+\begin{ex}
+	Let $\ip$ be a prime ideal in $A$. Show that $\ip[x]$ is a prime ideal in $A[x]$. If $\im$ is a maximal ideal in $A$, is $m[x]$ a maximal ideal in $A[x]$?
+\end{ex}
+
+\begin{sol}
+	Let $p = \sum_{i = 1}^n a_i x^i$ and $q = \sum_{j = 1}^m b_j x^j$, with $pq \in \ip[x]$. We have to show that either $p$ or $q \in \ip[x]$. We will proceed by induction on the degree of $pq = m+n$. If $m+n = 0$ then $p = a_0$, $q = b_0$ and $a_0 b_0 \in \ip \imp$ either $p = a_0$ or $q = b_0 \in \ip$. Now assuming that the statement is true for polynomials of degree $n+m-1$ we will prove it for polynomials of degree $n+m$.
+
+	Let $p = a_nx^n + p'$ and $q = b_m x^m + q'$. As $pq \in \ip[x]$ all the coefficients of $pq$ must belong to $\ip$. In particular, $a_n b_m \in \ip \imp a_n \text{ or } b_m \in \ip$. Without loss of generality we can suppose that $a_n \in \ip$. Then $a_n x^n (b_m x^m + q') \in \ip[x]$, and $pq - a_n x^n q = p'q \in \ip[x]$. As $\deg{p'q} < n+m$ we can apply induction hypothesis and either $q \in \ip[x]$ or $p' \in \ip[x] \imp p \in \ip[x]$ as $a_n \in \ip$.
+
+	However, maximal ideals are not so well behaved. For example, in the ring $\Z$ the ideal $(2)$ is maximal but $(2)[x]$ is not maximal in $\Z [x]$ because $\Z[x] / (2)[x] \cong (\Z/(2)) [x]$ which is not a field as for example the element $x \in (\Z/(2)) [x]$ is not a unit (by Exercise 1.2).
+\end{sol}
+
+\begin{ex}
+	\begin{enumerate}[label=(\roman*)]
+		\item If $M$ and $N$ are flat $A$-modules, then so is $M \otimes_A N$.
+		\item If $B$ is a flat $A$-algebra and $N$ is a flat $B$-module, then $N$ is flat as an $A$-module.
+	\end{enumerate}
+\end{ex}
+
+\begin{sol}
+	\begin{enumerate}[label=(\roman*)]
+		\item Let $0 \to M_0' \to M_0 \to M_0'' \to 0$ be an exact sequence of $A$-modules. Then, as $M$ is flat, the sequence $0 \to M_0' \otimes_A M \to M_0 \otimes_A M \to M_0'' \otimes_A M \to 0$ is also exact. As $N$ is exact, tensoring again the exact sequence with $N$ remains exact, so $0 \to M_0' \otimes_A M \otimes_A N \to M_0 \otimes_A M \otimes_A N \to M_0'' \otimes_A M \otimes_A N \to 0$ is exact. And therefore tensoring an exact sequence with $M \otimes_A N$ mantains the exactness, which means that $M \otimes_A N$ is a flat $A$-module.
+
+		\item Given $0 \to M_0' \to M_0 \to M_0'' \to 0$ an exact sequence of $A$-modules, the sequence $0 \to M_0' \otimes_A B \to M \otimes_A B_0 \to M_0'' \otimes_A B \to 0$ is an exact sequence of $A$-modules, then it will also be an exact sequence of $B$-modules when considered by extension of scalars (restriction and extension of scalars when considered as functors between $A$-modules and $B$-modules are exact functors, as the sets and applications envolved in the sequence are still the same ones). Then tensoring with $N$ also mantains the exactness of the sequence, ie
+		\[
+			0 \to M_0' \otimes_A B \otimes_B N \to M_0 \otimes_A B \otimes_B N \to M_0'' \otimes_A B \otimes_B N \to 0
+		\] 
+		is exact. As $B \otimes_B N \cong N$ the sequence $0 \to M_0' \otimes_A N \to M_0 \otimes_A N \to M_0'' \otimes_A N \to 0$ is exact as a $B$-module sequence, and therefore also as an $A$-module sequence.
+
+		In conclusion, $N$ is a flat $A$-module.
+	\end{enumerate}
+\end{sol}
+
+\begin{ex}
+	Let $0 \to M' \to M \to M'' \to 0$ be an exact sequence of $A$-modules. If $M'$ and $M"$ are finitely generated, then so is $M$.
+\end{ex}
+
+\begin{sol}
+	Let's name $f,g$ the morphisms between $M' \to M$ and $M \to M''$, respectively. Then, $M'$ is finitely generated $\imp \text{Im}(f) \subseteq M$ is finitely generated, and let $x_1, \dots, x_n$ be generators of $\text{Im}(f)$. On the other hand, $M/M' \cong M''$ which is also finitely generated. Let $y_1, \dots y_m \in M$ such that their projections in $M/M'$ are generators. Then $\{x_1, \dots, x_n, y_1, \dots, y_m \}$ generate $M$. %as $M/M' \cong M''$ and therefore every element of $M$ can be written as a linear combination of the $y_i$ plus an element of M' (which is generated by the x_i)% 
+\end{sol}
+
+\begin{ex}
+Let $A$ be a ring, $\ia$ an ideal contained in the Jacobson radical of $A$; let $M$ be an $A$-module and $N$ a finitely generated $A$-module, and let $u: M \to N$ be a homomorphism. If the induced homomorphism $M/ \ia M  \to N/ \ia N$ is surjective, then $u$ is surjective.
+\end{ex}
+
+\begin{sol}
+	By corollary 2.7, given $N$ finitely generated, $N'$ sumbodule of $N$ and $\ia$ an ideal contained in the Jacobson radical, we have $N = \ia N + N' \imp N' = N$. In the situation of this exercise, $u': M/ \ia M  \to N/ \ia N$ is surjective and therefore $\forall x \in N, \, x = x_1 + x_2$, with $x_1 \in \ia N$ and $x_2 \in \text{Im}(u)$. So we have that $N = \ia N + \text{Im}(u) \imp \text{Im}(u) = N \imp u$ is surjective.
+\end{sol}
+
+\begin{ex}
+	Let A be a ring $\neq 0$. Show that $A^m \cong A^n \imp m = n$.
+	\begin{enumerate}[label=(\roman*)]
+		\item If $\phi: A^m \to A^n$ is surjective, then $m \geq n$.
+		\item If $\phi: A^m \to A^n$ is injective, is it always the case that $m \leq n$?
+	\end{enumerate}
+
+\end{ex}
+
+\begin{sol}
+	Let $\im$ be a maximal ideal of $A$, $k = A/\im$ and let $\phi: A^m \to A^n$ be an isomorphism. As tensor product commutes with direct sums, $A/\im \otimes A^m \cong \bigoplus_{i=1}^m A/\im \otimes A \cong k^m$.
+	%By Proposition 2.17, $A/\im \otimes A^m$ is a $k$-vector space generated by $B = \{1 \otimes x_i\}_i$, where $x_i \in A^m$ is the element that has zeros in all positions except a 1 at position $i$. In addition, if we prove that $1 \otimes x_i \neq 0$ then it follows that the elements of $B$ are also linearly independent, (because it's be impossible to generate $1 \otimes x_i$ from the other elements unless $1 \otimes x_i = 0$). Indeed, let's consider the application $f: A/\im \times A^m \to (A/\im)^m+1 \to k$ where the first map is the reduction modulo $\im$ of each coordinate and last map is the product of all coordinates. $f$ is clearly bilinear and therefore induces a morphism $f': A/\ia \otimes A^m \to k$, and $f'(\sum_i 1\otimes x_i) = f(1) = 1$. Then, $\sum_i 1\otimes x_i \neq 0$ which proves that at least one of them $\neq 0$, and by symmetry we must have $1 \otimes x_i \neq 0 \, \, \forall i$.
+
+	In conclusion $A/\im \otimes A^m$ is a m-dimensional $k$-vector space and similarly, $A/\im \otimes A^n$ is a n-dimensional $k$-vector space. The isomorphism between $A^m$ and $A^n$ is equivalent to the exactness of the sequence $0 \to A^m \to A^n \to 0$. Then, by 2.18, tensoring the sequence preserves the exactness, and therefore $0 \to A/\im \otimes A^m \to A/\im \otimes A^n \to 0$ is exact, which implies that $1 \otimes \phi: A/\im \otimes A^m \to A/\im \otimes A^n$ is an isomorphism of vector spaces. So the dimensions of the spaces must be the same $\imp n = m$.
+
+	\begin{enumerate}[label=(\roman*)]
+		\item The same proof works for surjectivity, as it is preserved by tensoring (Proposition 2.18).
+	\end{enumerate}
+\end{sol}
+
+\begin{ex}
+	Let $M$ be a finitely generated $A$-module and $\phi: M \to A^n$ a surjective homomorphism. Show that $\ker(\phi)$ is finitely generated.
+\end{ex}
+
+\begin{sol}
+	Let $\{e_i\}_{i = 1}^n$ be the natural generator set of $A^n$. As $\phi$ is surjective, $\exists u_i$ such that $\phi(u_i) = e_i$. Let $N \subseteq M$ be the submodule of $M$ generated by $\{u_i\}_{i = 1}^n$. The restriction of $\phi$ to $N$ gives an isomorphism $N \cong A^n$, as $\phi(\sum_i a_i u_i ) = 0 \imp \sum_i a_i e_i = 0 \imp a_i = 0 \forall i$. 
+
+	Given $x \in M$, let $\phi(x) = (a_1, \dots, a_n)$. Then, let $y = x = x - \sum_{i = 1}^n a_i u_i$, and we have that $x = x - y + y$ with $y \in N$ and $\phi(x-y) = \phi(x)-\phi(y) = 0 \imp x-y \in \ker(\phi)$. This expression of $x$ as a sum of elements from $N$ and $\ker(\phi)$ is unique, as it is completely determined by $\phi(x)$. In consequence, $M = N \oplus \ker(\phi)$. If $\ker(\phi)$ was not finitely generated, we would have that also $M$ is not finitely generated, which is a contradiction. 
+\end{sol}
+
+\begin{ex}
+	Let $f: A \to B$ be a ring homomorphism, and let $N$ be a $B$-module. Regarding $N$ as an $A$-module by restriction of scalars, form the $B$-module $N_B = B \otimes_A N$. Show that the homomorphism $g: N \to N_B$ which maps $y$ to $1 \otimes y$ is injective and that $g(N)$ is a direct summand of $N_B$.
+\end{ex}
+
+\begin{sol}
+	$\forall b \otimes y \in N_B$, we can write $b \otimes y = (1 \otimes by) + (b \otimes y - 1 \otimes by)$. It's clear that $1 \otimes by \in \text{Im}(g)$. On the other hand, $p(b \otimes y - 1 \otimes by) = p(b \otimes y) - p(1 \otimes by) = 0 \imp b \otimes y - 1 \otimes by \in \ker(p)$. That expression of an element of $N_B$ as a sum of elements of $\text{Im}(g)$ and $\ker(p)$ is unique as it's completely determined by $p(b \otimes y)$. Therefore, $N_B = \text{Im}(g) \oplus \ker(p)$.
+
+	In addition, $p \circ g = Id_{N}$. Then, $1 \otimes y = 0 \imp y = p(1 \otimes y) = 0$, which proves that $g$ is injective.
+\end{sol}
+
