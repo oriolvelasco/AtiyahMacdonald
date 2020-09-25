@@ -1,0 +1,70 @@
+\section{Rings and Modules of Fractions}
+
+\begin{ex}
+	Let $S$ be a multiplicatively closed subset of a ring $A$, and let $M$ be a finitely generated $A$-module. Prove that $S^{-1} M = 0$ if and only if there exists $s \in S$ such that $sM = 0$.
+\end{ex}
+
+\begin{sol}
+	Let $m_1, \dots, m_n$ generators of $M$.
+
+	$\boxed{\Leftarrow}$ $S^{-1}M = 0 \imp m_i/s = 0 \imp \exists t_i \in S$ such that $m_i t_i = 0$. Let $s = \prod_{i = 1}^n t_i$, and we have that $s m_i = 0 \, \, \forall i$. Then $\forall m \in M$, $m = \sum_{i = 1}^n a_i m_i \imp sm = 0$. Then $s$ satisfies $sM = 0$. 
+
+	$\boxed{\Rightarrow}$ Let $m/t \in S^{-1}M$. We know that $\exists s \in S$ such that $sm = 0 \imp (m*1 - 0*t)s = 0 \imp m/t = 0/1$, and therefore $m/t = 0 \, \, \forall m/t \in S^{-1}M \imp S^{-1}M = 0$.
+\end{sol}
+
+\begin{ex}
+	Let $\ia$ be an ideal of a ring $A$, and let $S = 1 + \ia$. Show that $S{-1} \ia$ is contained in the Jacobson radical of $S^{-1} A$.
+	Use this result and Nakayama's lemma to give a proof of (2.5) which does not depend on determinants.
+\end{ex}
+
+\begin{sol}
+	We will use the characterization of Jacobson radical given by Proposition 1.9. Let $\frac{a}{s_1} \in S^{-1}\ia$ and $\frac{x}{s_2} \in S^{-1}A$. $s_i = 1 + b_i$, with $b_i \in \ia$. Then,
+	\[
+		1 - \frac{a}{s_1}\frac{x}{s_2} = \frac{s_1s_2 -ax}{s_1s_2} = \frac{1 + b_1 + b_2 + b_1b_2 -ax}{s_1s_2}
+	\]
+
+	As $y = b_1 + b_2 + b_1b_2 -ax \in \ia$ then $1 + y \in S$ and therefore $1 - \frac{a}{s_1}\frac{x}{s_2}$ is a unit $\imp S{-1} \ia$ is contained in the Jacobson radical of $S^{-1} A$.
+
+	Now let's prove 2.5. Let $\ia$ such that $\ia M = M$. Then  $(S^{-1} \ia)(S^{-1}M) = S^{-1}M$. Let $S = 1 + \ia$. Then $S^{-1}\ia$ is contained in the Jacobson radical, and as $M$ is finitely generated, $S^{-1}M$ is also finitely generated. We can apply Nakayama's Lemma $\imp S^{-1}M = 0$. Now, by Exercise 3.1, $\exists s = 1(mod \ia)$ such that $sM = 0$.
+\end{sol}
+
+\begin{ex}
+	Let $A$ be a ring, let $S$ and $T$ be two multiplicatively closed subsets of $A$, and let $U$ be the image of $T$ in $S^{-1}A$. Show that the rings $(ST)^{-1}A$ and $U^{-1} (S^{-1} A)$ are isomorphic.
+\end{ex}
+
+\begin{sol}
+	Let's define $U^{-1} (S^{-1} A) \to (ST)^{-1}A$ that maps $\frac{y/s}{t/s'} \mapsto \frac{ys'}{ts}$. We will prove that it is an isomorphism. Fist, let's see that it is well defined.
+	\[
+		\frac{y_1/s_1}{t_1/s_1'} = \frac{y_2/s_2}{t_2/s_2'} \iff \exists \frac{u}{v} \in U \text{ such that } \frac{u}{v} \left ( \frac{y_1}{s_1}\frac{t_2}{s_2'} - \frac{y_2}{s_2}\frac{t_1}{s_1'} \right ) = 0
+	\]
+
+	\[
+		u \left ( \frac{y_1 t_2}{s_1 s_2' v} - \frac{y_2 t_2}{s_2 s_1' v} \right ) = 0 \imp uv (y_1 t_2 s_2 s_1' - y_2 t_1 s_1 s_2') = 0
+	\]
+
+	In conclusion, $\frac{y_1 s_1'}{t_1 s_1} = \frac{y_2 s_2'}{t_2 s_2} \in (ST)^{-1}A$, and the application is well defined (the image doesn't depend on the representative).
+
+
+	\begin{itemize}
+		\item \textbf{Surjective:} Every $\frac{y}{ts} \in (ST)^{-1}A$ is image of $\frac{y/s}{t/1}$.
+		\item \textbf{Injective:} Suppose $\frac{ys'}{ts} = 0 \imp \exists u \in S, \, v \in T$ such that $uv s'y = 0 \imp (v(us')y -0) = 0 \imp \frac{vy}{1} = 0 \in U^{-1} (S^{-1} A) \imp \frac{y/s}{t/s'} = 0$.		
+	\end{itemize}
+\end{sol}
+
+\begin{ex}
+	Let $f: A \to B$ be a homomorphism of rings and let $S$ be a multiplicatively closed subset of $A$. Let $T= f(S)$. Show that $S^{-1} B$ and $T^{-1} B$ are isomorphic as $S^{-1}A$-modules.
+\end{ex}
+
+\begin{sol}
+	First we note that the product of elements of $A$ by elements of $B$ can be defined by restriction of scalars. We define $\phi: S^{-1}B \to T^{-1}B$ that maps $\frac{b}{s} \mapsto \frac{b}{f(s)}$. $\phi$ is injective, as $\frac{b}{f(s)} = 0 \imp \exists t = f(s') \in f(S)$ such that $bt = bf(s') = bs' = 0$. Then, $s'(b-0*s) = 0 \imp \frac{b}{s} = 0$. $\phi$ is exhaustive because $\forall t \in T, \, t = f(s)$ for a certain $s$; that is, $\frac{b}{t} = \frac{b}{f(s)} \in \text{Im}(\phi)$.
+\end{sol}
+
+\begin{ex}
+	Let $A$ be a ring. Suppose that, for each prime ideal $\ip$, the local ring $A_{\ip}$ has no nilpotent element $\neq 0$. Show that $A$ has no nilpotent element $\neq 0$. If each $A_{\ip}$ is an integral domain, is $A$ necessarily an integral domain?
+\end{ex}
+
+\begin{sol}
+	Let $x \in A$ is nilpotent ($\iff x \in \mathfrak{R}$). Now let's consider $\text{Ann}(x)$ which is an ideal of $A$ and therefore it's contained in a maximal ideal (in particular prime) $\ip_x$. Let $S = A - \ip_x$. We know that $S^{-1} \mathfrak{R}$ is the nilradical of $S^{-1}A$ by Corollary 3.12. $S^{-1} \mathfrak{R} = 0 \imp \forall y \in \mathcal{R}, \, \exists s \in S$ such that $ys = 0$. In particular, take $y = x$ and, as $\text{Ann}(x) \cap S = \emptyset$, then $x = 0$. This argument is valid $\forall x \in \mathfrak{R} \imp$ A has no nilpotent element. 
+
+	On the contrary, if $A_{\ip}$ is an integral domain $\forall \ip$, $A$ is not necessarily an integral domain. Let's show it with a counter-example. Let $A = k^2$, with $k$ a field. It's clear that $A$ is not integral, as $(1,0)(0,1) = 0$. As showed in Exercise 1.22, the only prime ideals of $A$ are the ideals generated by $(0,1)$ and $(1,0)$. Let $\ip = ((0,1))$ and let's consider the ring $A_{\ip}$. Let $x/s \neq 0$ and $y/t \neq 0 \imp \nexists s \in A - \ip$ such that $sx = 0$ or $sy = 0$, which means that the first coordinate of $x$ and $y \neq 0$. Then, $\frac{x}{s}\frac{y}{t} \neq 0$, and we have showed that $A_{\ip}$ is integral. The same argument works with the other prime ideal $\iq = ((1,0))$ by symmetry and therefore $A_{\ip}$ is an integral domain $\forall \ip$.
+\end{sol}
